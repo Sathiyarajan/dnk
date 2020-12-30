@@ -11,18 +11,30 @@ const isActive =(history,path) => {
 	}
 };
 
-const Menu = (props) => (
+const Menu = (history) => (
 	<div>
 	<ul className="nav nav-tabs bg-primary"> 
 		<li className="nav-item"> 
-			<Link className="nav-link" style={isActive(props.history,'/')} to="/">
+			<Link className="nav-link" 
+			style={isActive(history,'/')} 
+			to="/"
+			>
 				Home
 			</Link>
 		</li>
+		<li className="nav-item"> 
+			<Link className="nav-link" 
+			style={isActive(history,'/shop')} 
+			to="/shop"
+			>
+				Shop
+			</Link>
+		</li>
+
 {isAuthenticated() && isAuthenticated().user.role ===0 && (
 
 		<li className="nav-item"> 
-			<Link className="nav-link" style={isActive(props.history,'/user/dashboard')} to="/user/dashboard">
+			<Link className="nav-link" style={isActive(history,'/user/dashboard')} to="/user/dashboard">
 				Dashboard
 			</Link>
 		</li>
@@ -31,7 +43,7 @@ const Menu = (props) => (
 {isAuthenticated() && isAuthenticated().user.role ===1 && (
 
 		<li className="nav-item"> 
-			<Link className="nav-link" style={isActive(props.history,'/admin/dashboard')} to="/admin/dashboard">
+			<Link className="nav-link" style={isActive(history,'/admin/dashboard')} to="/admin/dashboard">
 				Dashboard
 			</Link>
 		</li>
@@ -40,12 +52,12 @@ const Menu = (props) => (
 {!isAuthenticated() && (
 		<Fragment>
 			<li className="nav-item"> 
-			<Link className="nav-link" style={isActive(props.history,'/signin')} to="/signin">
+			<Link className="nav-link" style={isActive(history,'/signin')} to="/signin">
 			Signin
 			</Link>
 		</li>
 		<li className="nav-item"> 
-			<Link className="nav-link" style={isActive(props.history,'/signup')} to="/signup">
+			<Link className="nav-link" style={isActive(history,'/signup')} to="/signup">
 			Signup
 			</Link>
 		</li>
@@ -58,7 +70,7 @@ const Menu = (props) => (
 		<span className="nav-link" style={{cursor: 'pointer', color: '#ffffff'}} 
 			onClick={()=> 
 				signout(() => {
-				props.history.push('/');
+				history.push('/');
 			})
 			}
 		>

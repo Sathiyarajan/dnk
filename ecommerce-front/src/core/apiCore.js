@@ -13,3 +13,38 @@ export const getProducts = (sortBy) => {
 	.catch(err => console.log(err));
 }
 
+export const getCategories = () => {
+
+	return fetch(`${API}/categories`, {
+		method: "GET"
+	}).then( response => {
+		return response.json()
+	})
+	.catch(err => console.log(err));
+};
+
+//router.post('/products/by/search', listBySearch)
+
+export const getFilteredProducts = (skip, limit, filters = {}) => {
+	const data = {
+		limit,
+		skip,
+		filters
+		//console.log(name, email, password)
+	}
+	return fetch(`${API}/products/by/search`,{
+			method: "POST",
+			headers: {
+				Accept: 'application/json',
+				"Content-Type": 'application/json',
+
+			},
+			body: JSON.stringify(data)
+		})
+		.then(response => {
+			return response.json()
+		})
+		.catch(err => {
+			console.log(err)
+					})
+	};
